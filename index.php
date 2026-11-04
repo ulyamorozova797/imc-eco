@@ -83,7 +83,7 @@ require INC . 'header.php';
     </div>
 
     <div class="section-head section-head--split">
-      <div><p class="eyebrow"><span class="num">01</span> Новости</p><h2 id="news-title">Что у нас <em>нового</em></h2></div>
+      <div><h2 id="news-title">Что у нас <em>нового</em></h2></div>
       <p><a class="link-arrow" href="<?= url('news/') ?>">Все новости <?= icon('arrow-up-right') ?></a></p>
     </div>
 
@@ -132,7 +132,7 @@ require INC . 'header.php';
       ];
       foreach ($metrics as $i => [$n, $suf, $unit, $txt]): ?>
       <div class="metric reveal" style="--d:<?= $i * .08 ?>s">
-        <p class="metric__num"><span data-count="<?= $n ?>"><?= $n ?></span><?= $suf ?></p>
+        <p class="metric__num"><span data-count="<?= $n ?>"><?= $n ?></span><?php if ($suf): ?><span class="metric__plus"><?= $suf ?></span><?php endif; ?></p>
         <p class="metric__unit mono"><?= e($unit) ?></p>
         <p class="metric__text"><?= e($txt) ?></p>
       </div>
@@ -145,7 +145,7 @@ require INC . 'header.php';
   <?= wave('top', 'var(--bg-alt)') ?>
   <div class="container">
     <div class="section-head section-head--split">
-      <div><p class="eyebrow"><span class="num">02</span> Услуги</p><h2 id="services-title">Экология и социальная сфера проекта — <em>от изысканий до закрытия</em></h2></div>
+      <div><h2 id="services-title">Экология и социальная сфера проекта — <em>от изысканий до закрытия</em></h2></div>
       <p>Пять направлений, одна команда. Оцениваем риски в деньгах, готовим ESIA для международных банков, сопровождаем предприятие и планируем закрытие с первого дня.</p>
     </div>
     <div class="bento" data-module="tilt">
@@ -157,7 +157,6 @@ require INC . 'header.php';
 <section class="process" data-module="process" aria-labelledby="process-title">
   <div class="process__pin">
     <div class="container process__head">
-      <p class="eyebrow"><span class="num">03</span> Как мы работаем</p>
       <h2 id="process-title">От вопроса на старте — <em>к цифрам и решениям</em></h2>
     </div>
     <div class="process__viewport">
@@ -185,17 +184,27 @@ require INC . 'header.php';
 <section class="section indicators-section" id="indicators" aria-labelledby="indicators-title">
   <div class="container">
     <div class="section-head section-head--split">
-      <div><p class="eyebrow">Система индикаторов</p><h2 id="indicators-title">Шесть индикаторов, которые переводят риски <em>в деньги</em></h2></div>
+      <div><h2 id="indicators-title">Шесть индикаторов, которые переводят риски <em>в деньги</em></h2></div>
       <p>Оцениваем индикаторы в связке: так формируется укрупнённая рисковая модель проекта на языке финансовых последствий — капзатрат, платежей, резервов, сроков и управленческих решений.</p>
     </div>
     <?= indicators_block() ?>
     <div class="underestimation">
-      <h3 class="underestimation__title">Цена недооценки — примеры из нашей практики</h3>
-      <ul class="underestimation__list" role="list">
-        <?php foreach ($sl['underestimation'] as $u): ?>
-        <li class="underestimation__item reveal"><b><?= e($u['title']) ?></b><span><?= e($u['text']) ?></span><span class="underestimation__price mono"><?= e($u['price']) ?></span></li>
+      <div class="underestimation__head">
+        <h3 class="underestimation__title">Цена недооценки</h3>
+        <p class="underestimation__lead">Четыре примера из нашей практики: как сэкономленный на старте вопрос превращается в прямые потери.</p>
+      </div>
+      <ol class="underestimation__list" role="list">
+        <?php foreach ($sl['underestimation'] as $i => $u): $steps = array_map('trim', explode('→', $u['text'])); ?>
+        <li class="underestimation__item reveal" style="--d:<?= $i * .08 ?>s">
+          <span class="underestimation__num" aria-hidden="true"><?= sprintf('%02d', $i + 1) ?></span>
+          <h4 class="underestimation__name"><?= e($u['title']) ?></h4>
+          <ol class="underestimation__chain" role="list">
+            <?php foreach ($steps as $k => $st): ?><li class="underestimation__step<?= $k === count($steps) - 1 ? ' underestimation__step--result' : '' ?>"><?= e(rtrim(mb_strtoupper(mb_substr($st, 0, 1)) . mb_substr($st, 1), '.')) ?></li><?php endforeach; ?>
+          </ol>
+          <p class="underestimation__price"><span>Цена ошибки</span><b><?= e($u['price']) ?></b></p>
+        </li>
         <?php endforeach; ?>
-      </ul>
+      </ol>
     </div>
   </div>
 </section>
@@ -204,7 +213,7 @@ require INC . 'header.php';
   <?= wave('top', 'var(--bg-soft)') ?>
   <div class="container">
     <div class="section-head section-head--split">
-      <div><p class="eyebrow"><span class="num">04</span> География</p><h2 id="map-title">Карта <em>проектов</em></h2></div>
+      <div><h2 id="map-title">Карта <em>проектов</em></h2></div>
       <p><?= count($projects['projects']) ?> проектов с экологическим и социальным блоком из <?= SITE['projects'] ?>+ проектов группы. Нажмите на точку, чтобы увидеть, что мы там делали.</p>
     </div>
     <div class="chips map-filters" role="group" aria-label="Фильтр по типу работ">
@@ -243,7 +252,7 @@ require INC . 'header.php';
 <section class="section opinion-section" id="opinion" aria-labelledby="opinion-title">
   <div class="container">
     <div class="section-head section-head--split">
-      <div><p class="eyebrow"><span class="num">05</span> Есть мнение</p><h2 id="opinion-title">Позиции команды по острым <em>вопросам отрасли</em></h2></div>
+      <div><h2 id="opinion-title">Позиции команды по острым <em>вопросам отрасли</em></h2></div>
       <p>Коротко — тезис и обоснование. Полностью — в публикациях экспертов IMC Montan в отраслевых журналах и докладах на конференциях.</p>
     </div>
     <figure class="quote-band reveal">
@@ -261,7 +270,7 @@ require INC . 'header.php';
 <section class="section section--tight gallery" aria-labelledby="gallery-title">
   <div class="container">
     <div class="section-head section-head--split">
-      <div><p class="eyebrow"><span class="num">06</span> Профессиональная жизнь</p><h2 id="gallery-title">Наша профессиональная <em>жизнь</em></h2></div>
+      <div><h2 id="gallery-title">Наша профессиональная <em>жизнь</em></h2></div>
       <p>Объекты, которые мы оцениваем, отраслевые форумы и выступления команды. Кликните на кадр, чтобы рассмотреть его.</p>
     </div>
   </div>
@@ -287,7 +296,7 @@ require INC . 'header.php';
 <section class="section team" id="team" aria-labelledby="team-title">
   <div class="container">
     <div class="section-head section-head--split section-head--top">
-      <div><p class="eyebrow"><span class="num">07</span> Команда</p><h2 id="team-title">Наша <em>команда</em></h2></div>
+      <div><h2 id="team-title">Наша <em>команда</em></h2></div>
       <p>Экологи, социологи, геоэкологи и экономисты природопользования с опытом проектов по российским и международным стандартам. Нажмите на карточку — расскажем подробнее.</p>
     </div>
     <div class="slider team-slider" data-module="slider" aria-label="Команда">
@@ -308,7 +317,6 @@ require INC . 'header.php';
   <?= topo('wide') ?>
   <div class="container contact__grid">
     <div class="contact__intro">
-      <p class="eyebrow"><span class="num">08</span> Обсудить проект</p>
       <h2 id="contact-title">Расскажите о&nbsp;задаче — <em>и мы предложим маршрут</em></h2>
       <p class="lead">Опишите проект и стадию, на которой он находится. Если задача не наша — честно скажем и подскажем, к кому обратиться.</p>
       <p class="contact__free"><?= icon('check') ?> <b>Первая консультация и оценка работ — бесплатно</b></p>
