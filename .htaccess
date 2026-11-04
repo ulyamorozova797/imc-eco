@@ -1,0 +1,100 @@
+# =========================================================
+# IMC Montan — Apache
+# Сайт работает и в корне домена, и в подпапке (RewriteBase не нужен).
+# =========================================================
+AddDefaultCharset UTF-8
+# Если хостинг запрещает Options в .htaccess (ошибка 500) — закомментируйте строку ниже
+Options -Indexes
+DirectoryIndex index.php index.html
+ErrorDocument 404 /404/index.php
+# Если сайт лежит в подпапке, поправьте путь: ErrorDocument 404 /subfolder/404/index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # HTTPS (раскомментируйте на боевом хостинге)
+  # RewriteCond %{HTTPS} off
+  # RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # www → без www (по желанию)
+  # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  # RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # Служебные PHP-файлы недоступны напрямую
+  RewriteRule ^assets/(include|data|html)/.+\.php$ - [F,L]
+
+  # RSS
+  RewriteRule ^rss\.xml$ rss.php [L]
+
+  RewriteRule ^sitemap\.xml$ sitemap.php [L]
+  RewriteRule ^robots\.txt$ robots.php [L]
+
+  # Слэш на конце для папок-страниц
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteRule ^(.*)$ %{REQUEST_URI}/ [L,R=301]
+
+  # ЧПУ: /news/slug/, /articles/slug/, /opinion/slug/, /podcasts/slug/, /cases/slug/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(news|articles|opinion|podcasts|cases)/([a-z0-9-]+)/?$ $1/item/index.php?slug=$2 [L,QSA]
+
+  # Всё прочее несуществующее → 404
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ 404/index.php [L]
+</IfModule>
+
+# ---------- Сжатие ----------
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml application/javascript application/json application/xml application/rss+xml image/svg+xml
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json application/xml application/rss+xml image/svg+xml
+</IfModule>
+
+# ---------- Типы ----------
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+  AddType application/javascript .js .mjs
+</IfModule>
+
+# ---------- Кэширование ----------
+# CSS/JS подключаются с ?v=filemtime, поэтому их можно кэшировать надолго
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 hour"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/avif "access plus 6 months"
+  ExpiresByType image/webp "access plus 6 months"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType image/svg+xml "access plus 6 months"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/json "access plus 1 hour"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
+</IfModule>
+
+# Не отдавать служебные файлы
+<FilesMatch "^(README\.md|\.env|composer\.(json|lock)|router\.php)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>

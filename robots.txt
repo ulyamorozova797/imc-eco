@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /assets/include/
+Disallow: /assets/data/*.php
+Disallow: /assets/php/
+Disallow: /success/
+Disallow: /ui-kit/
+Disallow: /cases/
+Disallow: /*?q=
+Allow: /
+
+Host: https://imc-montan.ru
+Sitemap: https://imc-montan.ru/sitemap.xml

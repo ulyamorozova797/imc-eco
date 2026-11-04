@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://imc-montan.ru/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://imc-montan.ru/about/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://imc-montan.ru/services/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://imc-montan.ru/news/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://imc-montan.ru/opinion/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://imc-montan.ru/contacts/</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://imc-montan.ru/feedback/</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://imc-montan.ru/privacy/</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://imc-montan.ru/services/ecological-audit/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://imc-montan.ru/services/esia/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://imc-montan.ru/services/expert-consulting/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://imc-montan.ru/services/environmental-support/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://imc-montan.ru/services/reclamation/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://imc-montan.ru/news/webinar-green-vector-2026/</loc><lastmod>2026-10-30</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://imc-montan.ru/news/journal-ecology-industry-kazakhstan/</loc><lastmod>2026-06-01</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://imc-montan.ru/news/greater-eurasia-2025/</loc><lastmod>2026-05-26</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://imc-montan.ru/news/minex-kazakhstan-2026/</loc><lastmod>2026-04-23</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://imc-montan.ru/news/ron-mining-waste-2025/</loc><lastmod>2025-03-01</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://imc-montan.ru/news/webinar-mining-waste-2024/</loc><lastmod>2024-10-16</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://imc-montan.ru/opinion/environmental-risk-is-financial/</loc><lastmod>2026-04-15</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://imc-montan.ru/opinion/tailings-after-closure/</loc><lastmod>2026-06-01</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://imc-montan.ru/opinion/reclamation-strategy/</loc><lastmod>2025-11-26</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://imc-montan.ru/opinion/social-license/</loc><lastmod>2026-10-09</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://imc-montan.ru/opinion/mining-waste-law/</loc><lastmod>2025-03-01</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+</urlset>
